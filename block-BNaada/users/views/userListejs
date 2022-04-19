@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--Title-->
-    <title>Home Page</title>
+    <title>List Page</title>
     <!-- Stylesheets -->
     <link rel="stylesheet" href="/stylesheets/style.css" />
     <!--Font Awesome-->
@@ -14,16 +14,24 @@
       crossorigin="anonymous"
     ></script>
   </head>
-  <body>
+  <body class="list">
     <!--Header-->
-    <header>
-      <h1>Users</h1>
+    <header class="flex justify-between align-center header">
+      <a href="/" class="logo">Users</a>
+      <a href="/users/new" class="btn btn-secondary"> Add User</a>
     </header>
     <!--Main-->
     <main>
-      <h2>Welcome to users!</h2>
-
-      <a class="btn btn-primary" href="/users">Watch Users</a>
+      <h2>List of Users</h2>
+      <ul>
+        <% users.forEach(elem => { %>
+        <li>
+          <h3><%= elem.name %></h3>
+          <h4><%= elem.age %></h4>
+          <a href="/users/<%= elem._id %>"> Show </a>
+        </li>
+        <% }) %>
+      </ul>
     </main>
   </body>
 </html>

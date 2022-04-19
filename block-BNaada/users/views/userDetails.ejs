@@ -17,13 +17,17 @@
   <body>
     <!--Header-->
     <header>
-      <h1>Users</h1>
+      <h1>User Details</h1>
     </header>
     <!--Main-->
     <main>
-      <h2>Welcome to users!</h2>
-
-      <a class="btn btn-primary" href="/users">Watch Users</a>
+      <article>
+        <h2><%= user.name %></h2>
+        <h3><%= user.userName %></h3>
+        <h3><%= user.email %></h3>
+        <h3><%= user.age %></h3>
+      </article>
+      <a href="/users" class="btn btn-primary"> Go Back</a>
     </main>
   </body>
 </html>
