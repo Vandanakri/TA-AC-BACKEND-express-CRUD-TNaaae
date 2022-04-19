@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Title-->
+  <title>Home Page</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/5cc6fb9f6b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!--Header-->
+  <header>
+    <h1 class="add">Add New User</h1>
+  </header>
+  <!--Main-->
+  <main>
+    <form action="/users" method="POST">
+      <input type="text" name="name" placeholder="Name" />
+      <input type="text" name="userName" placeholder="UserName" />
+      <input type="text" name="email" placeholder="Email" />
+      <input type="number" name="age" placeholder="Age" />
+      <input type="submit" value="Add User" />
+    </form>
+    <a href="/users"> Go Back</a>
+  </main>
+</body>
+
+</html>
