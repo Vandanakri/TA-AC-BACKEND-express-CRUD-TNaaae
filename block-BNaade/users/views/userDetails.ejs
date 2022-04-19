@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--Title-->
+  <title>Home Page</title>
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+  <!--Font Awesome-->
+  <script src="https://kit.fontawesome.com/5cc6fb9f6b.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  
+  
+    <h3>User Details page</h3>
+      <h2><%= user.name %></h2>
+      <h3><%= user.email %></h3>
+      <h3> <%= user.age %> </h3>
+   
+    <a href="/users/<%= user.id %>/edit">Edit</a>
+    <a href="/users"> Go Back</a>
+  
+</body>
+
+</html>
