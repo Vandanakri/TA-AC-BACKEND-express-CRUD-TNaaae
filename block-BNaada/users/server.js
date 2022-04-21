@@ -1,46 +1,49 @@
-var express = require('express');
-var mongoose = require('mongoose');
-var path = require('path');
+//requires
+var express = require("express");
+var mongoose = require("mongoose");
+var path = require("path");
+var logger = require("morgan");
+var userRoutes = require("./routes/users");
 
-//Requiring routes
-var indexRoute = require('./routes/index');
-var userRoute = require('./routes/users');
-
-//connected to database
-
-mongoose.connect("mongodb://localhost/users", (err) => {
-  console.log(err ? err : "connected:true");
-})
-
-//instantiating the app
-
+//instantiate the app
 var app = express();
 
-//middleware
+app.use( logger("dev") );
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+//connecting the database
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(__dirname + '/assets'));
-
-//handling routing middleware
-app.use('/', indexRoute);
-app.use('/users', userRoute);
-
-//error handling middleware
-
-app.use((req, res, next) => {
-  res.statusCode(404).send("Page not found");
-})
-
-app.use((err, req, res, next) => {
-  res.send(err);
+mongoose.connect( "mongodb://localhost/sample",
+ (err)=>{
+    console.log( err ? "connected false" : "connected: true" );
 });
 
-//connecting to server
+//middleware
+app.set( "view engine", "ejs" );
+app.set( "views", path.join( __dirname, "views" ) );
 
-app.listen(3000, () => {
-  console.log("server is listening on port 3k");
+app.use( express.json() );
+app.use( express.urlencoded( { extended: false } ) );
+
+app.get('/', (req,res) => {
+  res.render('index.ejs')
 })
+
+//handling routing middleware
+
+app.use( "/users", userRoutes );
+
+
+//error handling
+
+app.use(( req, res, next )=>{
+  res.status(404).send("Page Not Found");
+})
+
+app.use((error, req, res, next) => {
+  res.send(error);
+});
+
+
+app.listen(4000, ()=>{
+  console.log("server is listening on port 4k");
+});
