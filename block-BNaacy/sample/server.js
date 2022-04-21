@@ -1,48 +1,49 @@
-var express = require('express');
-var path = require('path');
-var mongoose = require('mongoose');
-var userRouter = require('./routes/user');
-var indexRoute = require('./routes/index');
-const User = require('./models/user')
+//requires
+var express = require("express");
+var mongoose = require("mongoose");
+var path = require("path");
+var logger = require("morgan");
+var userRoutes = require("./routes/users");
 
-//connect to database
-
-mongoose.connect( "mongodb://localhost/sample", (err)=> {
-  console.log( err ? err : "connected: true" );
-})
-
-//instantiating express app
-
+//instantiate the app
 var app = express();
 
+app.use( logger("dev") );
+
+//connecting the database
+
+mongoose.connect( "mongodb://localhost/sample",
+ (err)=>{
+    console.log( err ? "connected false" : "connected: true" );
+});
+
 //middleware
-//setup view engine
-app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+app.set( "view engine", "ejs" );
+app.set( "views", path.join( __dirname, "views" ) );
 
-app.use(express.urlencoded({ extended: false }));
+app.use( express.json() );
+app.use( express.urlencoded( { extended: false } ) );
 
-
-//routing middlewares
-app.get('/',(req,res) => {
+app.get('/', (req,res) => {
   res.render('index.ejs')
 })
 
-app.use('/user',userRouter);
-app.use('/',indexRoute);
+//handling routing middleware
 
-//handling of error
+app.use( "/users", userRoutes );
 
-app.use( (req, res, next )=>{
-  res.statusCode(404).send("Page not found");
+
+//error handling
+
+app.use(( req, res, next )=>{
+  res.status(404).send("Page Not Found");
 })
 
-app.use( ( err, req, res, next )=>{
-  res.send(err);
+app.use((error, req, res, next) => {
+  res.send(error);
 });
 
-//listening
 
-app.listen(3000,() => {
-  console.log('server listening on port 3k')
-})
+app.listen( 3000, ()=>{
+  console.log("server is listening on port 3k");
+});
