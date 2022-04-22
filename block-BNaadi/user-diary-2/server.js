@@ -12,7 +12,7 @@ app.use( logger("dev") );
 
 //connecting the database
 
-mongoose.connect( "mongodb://localhost/sample",
+mongoose.connect( "mongodb://localhost/user-diary-2",
  (err)=>{
     console.log( err ? "connected false" : "connected: true" );
 });
